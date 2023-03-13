@@ -1,0 +1,7 @@
+npm i apollo-server-express express graphql reflect-metadata type-graphql
+
+npm i --save-dev @types/express @types/graphql @types/node nodemon ts-node typescrips
+
+esnext.asynciterable // is needed to work with apollo
+"emitDecoratorMetadata": true, // to work with typegraphql
+"experimentalDecorators": true, // to work with typegraphql
