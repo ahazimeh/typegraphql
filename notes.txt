@@ -5,3 +5,6 @@ npm i --save-dev @types/express @types/graphql @types/node nodemon ts-node types
 esnext.asynciterable // is needed to work with apollo
 "emitDecoratorMetadata": true, // to work with typegraphql
 "experimentalDecorators": true, // to work with typegraphql
+
+npm i pg typeorm bcryptjs
+npm i --save-dev @types/bcryptjs
