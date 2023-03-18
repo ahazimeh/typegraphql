@@ -8,3 +8,21 @@ esnext.asynciterable // is needed to work with apollo
 
 npm i pg typeorm bcryptjs
 npm i --save-dev @types/bcryptjs
+
+ts-node-dev restarts faster
+    "start": "nodemon --exec ts-node src/index.ts"
+    "start": "ts-node-dev src/index.ts"
+
+// so we can do import Express from "express" rather than * as Express
+"allowSyntheticDefaultImports": true,
+"esModuleInterop": true,
+
+npm i class-validator
+Fractal folder structure: https://hackernoon.com/fractal-a-react-app-structure-for-infinite-scale-4dab943092af
+
+custom decorators: https://github.com/typestack/class-validator#custom-validation-decorators
+
+//till min 1
+npm install ioredis connect-redis express-session cors
+npm install --save-dev @types/ioredis @types/connect-redis @types/express-session @types/cors
+//till min 1

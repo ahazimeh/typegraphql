@@ -1,4 +1,4 @@
-import { Field, ID, ObjectType } from "type-graphql";
+import { Field, ID, ObjectType, Root } from "type-graphql";
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 @ObjectType() // make it a type in graphql
@@ -17,7 +17,21 @@ export class User extends BaseEntity {
   lastName: string;
 
   @Field()
-  name: string;
+  name1: string;
+
+  @Field()
+  name(@Root() parent: User): string {
+    return `${parent.firstName} ${parent.lastName}`;
+  }
+
+  // @Field(type => Float, { nullable: true })
+  //   averageRating(@Arg("since") sinceDate: Date): number | null {
+  //     const ratings = this.ratings.filter(rate => rate.date > sinceDate);
+  //     if (!ratings.length) return null;
+
+  //     const ratingsSum = ratings.reduce((a, b) => a + b, 0);
+  //     return ratingsSum / ratings.length;
+  //   }
 
   @Field()
   @Column("text", { unique: true })
