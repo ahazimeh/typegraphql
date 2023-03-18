@@ -22,7 +22,5 @@ Fractal folder structure: https://hackernoon.com/fractal-a-react-app-structure-f
 
 custom decorators: https://github.com/typestack/class-validator#custom-validation-decorators
 
-//till min 1
 npm install ioredis connect-redis express-session cors
 npm install --save-dev @types/ioredis @types/connect-redis @types/express-session @types/cors
-//till min 1
