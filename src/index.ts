@@ -1,18 +1,19 @@
 import "reflect-metadata";
 import { ApolloServer } from "apollo-server-express";
 import Express from "express";
-import { buildSchema } from "type-graphql";
+import { AuthChecker, buildSchema } from "type-graphql";
 import { DataSource } from "typeorm";
 import { User } from "./entity/User";
 import session from "express-session";
 import connectRedis from "connect-redis";
 import cors from "cors";
 
-import { RegisterResolver } from "./modals/user/register";
+import { RegisterResolver } from "./modules/user/register";
 import { redis } from "./redis";
-import { LoginResolver } from "./modals/user/Login";
+import { LoginResolver } from "./modules/user/Login";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
-import { MeResolver } from "./modals/user/Me";
+import { MeResolver } from "./modules/user/Me";
+import { MyContext } from "./types/MyContext";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -27,10 +28,17 @@ export const AppDataSource = new DataSource({
   subscribers: [],
   migrations: [],
 });
+export const customAuthChecker: AuthChecker<MyContext> = (
+  { root, args, context: { req }, info },
+  roles
+) => {
+  return !!req.session.userId;
+};
 
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [MeResolver, RegisterResolver, LoginResolver],
+    authChecker: customAuthChecker,
   });
   const apolloServer = new ApolloServer({
     schema,
@@ -41,7 +49,6 @@ const main = async () => {
   const app = Express();
 
   const RedisStore = require("connect-redis").default;
-  console.log(session, connectRedis, redis);
   app.use(
     cors({
       credentials: true,
@@ -75,7 +82,6 @@ const main = async () => {
 
   AppDataSource.initialize()
     .then(() => {
-      console.log("aa");
       // here you can start to work with your database
     })
     .catch((error) => console.log(error));

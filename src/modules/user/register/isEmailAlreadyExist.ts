@@ -12,8 +12,6 @@ export class isEmailAlreadyExistConstraint
   implements ValidatorConstraintInterface
 {
   validate(email: string, args: ValidationArguments) {
-    console.log("zz", args);
-    console.log("zz", (args.object as User).firstName);
     return User.findOne({ where: { email } }).then((user) => {
       if (user) return false;
       return true;
