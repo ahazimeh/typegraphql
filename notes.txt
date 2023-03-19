@@ -24,3 +24,6 @@ custom decorators: https://github.com/typestack/class-validator#custom-validatio
 
 npm install ioredis connect-redis express-session cors
 npm install --save-dev @types/ioredis @types/connect-redis @types/express-session @types/cors
+
+npm i nodemailer uuid
+npm i --save-dev @types/nodemailer @types/uuid

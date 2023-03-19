@@ -14,6 +14,8 @@ import { LoginResolver } from "./modules/user/Login";
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core";
 import { MeResolver } from "./modules/user/Me";
 import { MyContext } from "./types/MyContext";
+import { sendEmail } from "./modules/utils/sendEmail";
+import { ConfirmUserResolver } from "./modules/user/ConfirmUser";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -37,7 +39,12 @@ export const customAuthChecker: AuthChecker<MyContext> = (
 
 const main = async () => {
   const schema = await buildSchema({
-    resolvers: [MeResolver, RegisterResolver, LoginResolver],
+    resolvers: [
+      MeResolver,
+      RegisterResolver,
+      LoginResolver,
+      ConfirmUserResolver,
+    ],
     authChecker: customAuthChecker,
   });
   const apolloServer = new ApolloServer({
