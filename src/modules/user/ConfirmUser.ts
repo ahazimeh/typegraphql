@@ -2,6 +2,7 @@ import { Arg, Ctx, Mutation, Resolver } from "type-graphql";
 import { User } from "../../entity/User";
 import { MyContext } from "../../types/MyContext";
 import { redis } from "../../redis";
+import { confirmUserPrefix } from "../constants/redisPrefixes";
 declare module "express-session" {
   export interface SessionData {
     // userId: { [key: string]: any };
@@ -15,7 +16,7 @@ export class ConfirmUserResolver {
     @Arg("token") token: string,
     @Ctx() ctx: MyContext
   ): Promise<boolean> {
-    const userId = await redis.get(token);
+    const userId = await redis.get(confirmUserPrefix + token);
 
     if (!userId) {
       return false;

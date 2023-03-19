@@ -34,7 +34,6 @@ export class LoginResolver {
       return null;
     }
 
-    console.log(user.id);
     ctx.req.session!.userId = user.id;
 
     return user;

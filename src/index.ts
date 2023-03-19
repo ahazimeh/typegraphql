@@ -16,6 +16,7 @@ import { MeResolver } from "./modules/user/Me";
 import { MyContext } from "./types/MyContext";
 import { sendEmail } from "./modules/utils/sendEmail";
 import { ConfirmUserResolver } from "./modules/user/ConfirmUser";
+import { ChangePasswordResolver } from "./modules/user/ChangePassword";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -40,11 +41,14 @@ export const customAuthChecker: AuthChecker<MyContext> = (
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [
-      MeResolver,
-      RegisterResolver,
-      LoginResolver,
-      ConfirmUserResolver,
+      __dirname + "/modules/**/*.ts",
+      // MeResolver,
+      // RegisterResolver,
+      // LoginResolver,
+      // ConfirmUserResolver,
+      // ChangePasswordResolver,
     ],
+    validate: { forbidUnknownValues: false },
     authChecker: customAuthChecker,
   });
   const apolloServer = new ApolloServer({
