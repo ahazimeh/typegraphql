@@ -1,11 +1,14 @@
 // Fractal folder structure:
 import { IsEmail, Length, Min } from "class-validator";
-import { PasswordInput } from "../../../modules/shared/PasswordInput";
+import { PasswordMixin } from "../../../modules/shared/PasswordInput";
 import { Field, InputType } from "type-graphql";
 import { IsEmailAlreadyExist } from "./isEmailAlreadyExist";
+import { OkMixin } from "../../shared/OkMixen";
 
 @InputType()
-export class RegisterInput extends PasswordInput {
+// OkMixin(
+// )
+export class RegisterInput extends PasswordMixin(class {}) {
   @Field()
   @Length(1, 255, { message: "asd" })
   firstName: string;

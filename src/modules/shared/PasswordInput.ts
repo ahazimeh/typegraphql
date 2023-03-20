@@ -1,9 +1,13 @@
 // Fractal folder structure:
-import { Min } from "class-validator";
-import { Field, InputType } from "type-graphql";
+import { Min, MinLength } from "class-validator";
+import { ClassType, Field, InputType } from "type-graphql";
 
-@InputType()
-export class PasswordInput {
-  @Field()
-  password: string;
-}
+export const PasswordMixin = <T extends ClassType>(BaseClass: T) => {
+  @InputType({ isAbstract: true })
+  class PasswordInput extends BaseClass {
+    @Field()
+    password: string;
+  }
+
+  return PasswordInput;
+};
