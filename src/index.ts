@@ -17,6 +17,13 @@ import { MyContext } from "./types/MyContext";
 import { sendEmail } from "./modules/utils/sendEmail";
 import { ConfirmUserResolver } from "./modules/user/ConfirmUser";
 import { ChangePasswordResolver } from "./modules/user/ChangePassword";
+import { ForgotPasswordResolver } from "./modules/user/ForgotPassword";
+import { LogoutResolver } from "./modules/user/Logout";
+import {
+  CreateProductResolver,
+  CreateUserResolver,
+} from "./modules/user/CreateUser";
+import { Product } from "./entity/Product";
 
 export const AppDataSource = new DataSource({
   type: "postgres",
@@ -27,7 +34,7 @@ export const AppDataSource = new DataSource({
   database: "mydb",
   synchronize: true,
   logging: true,
-  entities: [User],
+  entities: [User, Product],
   subscribers: [],
   migrations: [],
 });
@@ -41,12 +48,16 @@ export const customAuthChecker: AuthChecker<MyContext> = (
 const main = async () => {
   const schema = await buildSchema({
     resolvers: [
-      __dirname + "/modules/**/*.ts",
-      // MeResolver,
-      // RegisterResolver,
-      // LoginResolver,
-      // ConfirmUserResolver,
-      // ChangePasswordResolver,
+      // __dirname + "/modules/**/*.ts",
+      MeResolver,
+      RegisterResolver,
+      LoginResolver,
+      ConfirmUserResolver,
+      ChangePasswordResolver,
+      ForgotPasswordResolver,
+      LogoutResolver,
+      CreateUserResolver,
+      CreateProductResolver,
     ],
     validate: { forbidUnknownValues: false },
     authChecker: customAuthChecker,
