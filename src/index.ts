@@ -113,7 +113,8 @@ const main = async () => {
                 );
               }
               // And here we can e.g. subtract the complexity point from hourly API calls limit.
-              console.log("Used query complexity points:", complexity);
+
+              // console.log("Used query complexity points:", complexity);
             },
           } as any),
       },

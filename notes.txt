@@ -27,3 +27,7 @@ npm install --save-dev @types/ioredis @types/connect-redis @types/express-sessio
 
 npm i nodemailer uuid
 npm i --save-dev @types/nodemailer @types/uuid
+
+dependency injection:
+    pattern used is active record pattern
+    another approach
